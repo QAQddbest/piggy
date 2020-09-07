@@ -1,5 +1,6 @@
 package dd.oliver.piggy.view
 
+import dd.oliver.piggy.server.FileServer
 import javafx.scene.Parent
 import tornadofx.View
 import tornadofx.borderpane
@@ -7,8 +8,11 @@ import kotlin.system.exitProcess
 
 class RootView : View("Piggy") {
 
+    private val server: FileServer by inject()
+
     init {
         primaryStage.setOnCloseRequest {
+            server.server.stop()
             exitProcess(0)
         }
         primaryStage.minWidth = 350.0
