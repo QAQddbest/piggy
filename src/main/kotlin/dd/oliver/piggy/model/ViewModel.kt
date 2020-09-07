@@ -6,6 +6,7 @@ import tornadofx.getValue
 import tornadofx.setValue
 
 class ViewModel : ViewModel() {
+    // example: C:/Temp, /home/oliverdd/Temp
     val pathProperty = SimpleStringProperty(this, "path", "") // 幕后属性
     var path: String by pathProperty
 

@@ -22,7 +22,7 @@ class StartController : Controller() {
     }
 
     internal fun startServer() {
-        server.start()
+        server.server.start()
     }
 
 }

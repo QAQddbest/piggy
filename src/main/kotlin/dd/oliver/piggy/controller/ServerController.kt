@@ -8,6 +8,6 @@ class ServerController : Controller() {
     private val server: FileServer by inject()
 
     internal fun stopServer() {
-        server.stop()
+        server.server.stop()
     }
 }

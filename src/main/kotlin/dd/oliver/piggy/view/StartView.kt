@@ -22,7 +22,7 @@ class StartView : View("StartView") {
                 alignment = Pos.CENTER
             }
             text("Piggy")
-            padding = Insets(20.0, 20.0, 20.0, 20.0)
+            paddingAll = 20.0
         }
 
         fieldset {
