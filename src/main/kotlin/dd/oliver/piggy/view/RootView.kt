@@ -5,18 +5,18 @@ import tornadofx.View
 import tornadofx.borderpane
 import kotlin.system.exitProcess
 
-class RootView : View("RootView") {
+class RootView : View("Piggy") {
 
     init {
         primaryStage.setOnCloseRequest {
             exitProcess(0)
         }
-        primaryStage.minWidth = 400.0
-        primaryStage.minHeight = 800.0
-        primaryStage.width = 450.0
-        primaryStage.height = 900.0
-        primaryStage.maxWidth = 500.0
-        primaryStage.maxHeight = 1000.0
+        primaryStage.minWidth = 350.0
+        primaryStage.minHeight = 600.0
+        primaryStage.width = 400.0
+        primaryStage.height = 700.0
+        primaryStage.maxWidth = 450.0
+        primaryStage.maxHeight = 800.0
     }
 
     private val startView: StartView = find(StartView::class)

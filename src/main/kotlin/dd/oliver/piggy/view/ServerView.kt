@@ -32,7 +32,7 @@ class ServerView : View("ServerView") {
         text("你可以在浏览器中输入以下链接以访问服务器")
         textfield {
             whenDocked {
-                this.text = """http:\\${model.ip}:${model.port}"""
+                this.text = """http://${model.ip}:${model.port}"""
             }
 
             isEditable = false
