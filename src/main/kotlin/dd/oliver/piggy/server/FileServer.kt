@@ -10,9 +10,8 @@ import org.http4k.server.Http4kServer
 import org.http4k.server.Netty
 import org.http4k.server.asServer
 import tornadofx.Controller
-import tornadofx.JsonBuilder
 import java.io.File
-import javax.json.Json
+import java.io.FileInputStream
 
 class FileServer : Controller() {
 
@@ -28,22 +27,20 @@ class FileServer : Controller() {
         // absolute path to the file
         val filePath = model.path + basePath
         val file = File(filePath)
-        if (file.isDirectory) {
+        if (file.isDirectory) { // example: /temp/
             val fileList = file.list()
-            // Fill in JsonArray
-            val jBuilder = Json.createArrayBuilder()
+            val piggyNodeList = mutableListOf<PiggyNode>()
             fileList.forEach { fileName ->
-                jBuilder.add(PiggyNode(fileName, basePath).toJSON())
+                piggyNodeList.add(PiggyNode(fileName, basePath + "${fileName}/"))
             }
-            val jArray = jBuilder.build()
-            val jsonBuilder = JsonBuilder()
-            // Add JsonArray to Json
-            jsonBuilder.add("files", jArray)
-            val finalJson = jsonBuilder.build()
-            println(finalJson)
-            Response(Status.OK).body(template.apply(finalJson))
+            val piggyList = PiggyList(piggyNodeList)
+            Response(Status.OK).body(template.apply(piggyList))
         } else if (file.isFile) {
-            Response(Status.OK).body("File")
+            // todo: error on file transfer
+            val inputStream = FileInputStream(file)
+            inputStream.use { ips ->
+                Response(Status.OK).body(ips)
+            }
         }else
             Response(Status.OK).body("error")
     }

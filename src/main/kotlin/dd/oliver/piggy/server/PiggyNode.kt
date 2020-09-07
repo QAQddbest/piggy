@@ -1,13 +1,15 @@
 package dd.oliver.piggy.server
 
-import tornadofx.JsonBuilder
-import tornadofx.JsonModel
-import javax.json.JsonObject
+import org.http4k.template.ViewModel
 
 //enum class PiggyNodeType {
 //    DIRECTORY,
 //    FILE,
 //}
+
+class PiggyList(
+    val lists: MutableList<PiggyNode>
+) : ViewModel
 
 class PiggyNode(
     /**
@@ -18,11 +20,4 @@ class PiggyNode(
      * file's path of the node. Example: /temp/a.txt, it's /temp/
      */
     val filePath: String,
-): JsonModel {
-    override fun toJSON(json: JsonBuilder) {
-        with(json) {
-            add("fileName", fileName)
-            add("filePath", filePath)
-        }
-    }
-}
+)
