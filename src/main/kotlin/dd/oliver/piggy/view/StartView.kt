@@ -5,6 +5,8 @@ import dd.oliver.piggy.controller.StartController
 import dd.oliver.piggy.model.ViewModel
 import javafx.geometry.Insets
 import javafx.geometry.Pos
+import javafx.scene.text.FontSmoothingType
+import javafx.scene.text.FontWeight
 import tornadofx.*
 
 class StartView : View("StartView") {
@@ -21,8 +23,18 @@ class StartView : View("StartView") {
         ) {
             imageview(resources.image("/img/logo.png")) {
                 alignment = Pos.CENTER
+                style {
+
+                }
             }
-            text("Piggy")
+            text("Piggy") {
+                style {
+                    fontFamily = "Microsoft YaHei UI"
+                    fontSmoothingType = FontSmoothingType.LCD
+                    fontWeight = FontWeight.BOLD
+                    fontSize = 20.px
+                }
+            }
             paddingAll = 20.0
         }
 
@@ -73,11 +85,12 @@ class StartView : View("StartView") {
 
         button(UserLocale("StartView_StartSharing")) {
             action {
+
                 // Start server
                 runAsync {
                     controller.startServer()
                 } ui { // Change view
-                    replaceWith<ServerView>()
+                    replaceWith(ServerView::class, ViewTransition.Slide(0.3.seconds, ViewTransition.Direction.LEFT))
                 }
             }
             enableWhen(model.valid)

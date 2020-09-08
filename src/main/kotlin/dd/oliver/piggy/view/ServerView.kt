@@ -46,7 +46,7 @@ class ServerView : View("ServerView") {
                 runAsync {
                     controller.stopServer()
                 } ui {
-                    replaceWith<StartView>()
+                    replaceWith(StartView::class, ViewTransition.Slide(0.3.seconds, ViewTransition.Direction.RIGHT))
                 }
             }
         }
