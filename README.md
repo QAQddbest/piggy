@@ -24,4 +24,4 @@ Web interface:
 
 - [] multi-process download
 - [] bring down memory cost(buffer)
-- [] i10n
+- [] i18n

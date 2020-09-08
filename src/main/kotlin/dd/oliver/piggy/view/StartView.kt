@@ -1,5 +1,6 @@
 package dd.oliver.piggy.view
 
+import dd.oliver.piggy.UserLocale
 import dd.oliver.piggy.controller.StartController
 import dd.oliver.piggy.model.ViewModel
 import javafx.geometry.Insets
@@ -27,18 +28,19 @@ class StartView : View("StartView") {
 
         fieldset {
 
-            field("路径") {
+            field(UserLocale("StartView_Path")) {
                 textfield(model.pathProperty) {
                     setOnMouseClicked {
-                        val pathFile = chooseDirectory("选择共享路径", null, primaryStage)
-                        model.path = pathFile?.absolutePath ?: "未选择路径"
+                        val pathFile =
+                            chooseDirectory(UserLocale("StartView_DirectoryChooserTitle"), null, primaryStage)
+                        model.path = pathFile?.absolutePath ?: UserLocale("StartView_PathNotChooseMessage")
                     }
                     isEditable = false
                     validator(ValidationTrigger.OnChange()) {
                         if (controller.checkPath()) {
                             null
                         } else {
-                            error("路径不存在或不是路径")
+                            error(UserLocale("StartView_PathNotClearPopUp"))
                         }
                     }
                 }
@@ -46,19 +48,19 @@ class StartView : View("StartView") {
                 padding = Insets(10.0, 20.0, 10.0, 20.0)
             }
 
-            field("端口") {
+            field(UserLocale("StartView_Port")) {
                 textfield(model.portProperty) {
                     validator(ValidationTrigger.OnChange(250)) {
                         var message: ValidationMessage? = null
                         if (it != null) {
                             message = if (!it.isInt())
-                                error("端口号输入不正确")
+                                error(UserLocale("StartView_PortNotRight"))
                             else if (it.toInt() >= 65536)
-                                error("端口号不能大于65536")
+                                error(UserLocale("StartView_PortCantGreaterTo"))
                             else if (it.toInt() in 0..1024)
-                                error("端口号不能为周知端口号")
+                                error(UserLocale("StartView_PortCantBeWellKnown"))
                             else if (it.toInt() < 0)
-                                error("端口号不能为负数")
+                                error(UserLocale("StartView_PortCantLessTo"))
                             else
                                 null
                         }
@@ -69,7 +71,7 @@ class StartView : View("StartView") {
             }
         }
 
-        button("开始共享") {
+        button(UserLocale("StartView_StartSharing")) {
             action {
                 // Start server
                 runAsync {

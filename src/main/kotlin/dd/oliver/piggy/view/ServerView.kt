@@ -1,5 +1,6 @@
 package dd.oliver.piggy.view
 
+import dd.oliver.piggy.UserLocale
 import dd.oliver.piggy.controller.ServerController
 import dd.oliver.piggy.model.ViewModel
 import javafx.geometry.Pos
@@ -18,9 +19,9 @@ class ServerView : View("ServerView") {
         20.0,
         Pos.CENTER,
     ) {
-        text("正在共享")
+        text(UserLocale("ServerView_NowSharing"))
         text(model.path)
-        text("于")
+        text(UserLocale("ServerView_At"))
         hbox(
             5.0,
             Pos.CENTER,
@@ -29,7 +30,7 @@ class ServerView : View("ServerView") {
             text(":")
             text(model.portProperty)
         }
-        text("你可以在浏览器中输入以下链接以访问服务器")
+        text(UserLocale("ServerView_BrowserMessage"))
         textfield {
             whenDocked {
                 this.text = """http://${model.ip}:${model.port}"""
@@ -40,7 +41,7 @@ class ServerView : View("ServerView") {
             maxWidth = 200.0
 
         }
-        button("结束共享") {
+        button(UserLocale("ServerView_StopSharing")) {
             action {
                 runAsync {
                     controller.stopServer()
